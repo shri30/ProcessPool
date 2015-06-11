@@ -5,11 +5,11 @@ The process pooler works by creating pool of processes and excutes each of the s
 
 Features:
 
--Interprocess communication managed internally by the framework.
--Access to procesID for each of the executing tasks.
--Parent classpath inheritence.
--Monitor running process through Web UI
--Easy to use API.
+	-Interprocess communication managed internally by the framework.
+	-Access to procesID for each of the executing tasks.
+	-Parent classpath inheritence.
+	-Monitor running process through Web UI
+	-Easy to use API.
 
 
 Refer to example package on how to use the API.
