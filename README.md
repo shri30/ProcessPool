@@ -1,12 +1,14 @@
 # ProcessPool 1.0
 Framework to create a Pool of processes in Java. Ideal for memory intensive operations for your application. 
-The process pooler works by creating pool of processes and excutes each of the submitted task in a seperate JVM there by increasing the throughput of the application. The process pool also provides GUI for monitoring the status of the process in the pool.
+The process pooler works by creating pool of processes and excutes each of the submitted task in a seperate JVM there by increasing the throughput of the application. The process pool also provides Web UI for monitoring the status of the process in the pool.
 
 Features:
-Interprocess communication managed internally by the framework.
-Access to procesID for each of the executing tasks.
-Parent classpath inheritence.
-Easy to use API.
+
+-nterprocess communication managed internally by the framework.
+-Access to procesID for each of the executing tasks.
+-Parent classpath inheritence.
+-Monitor running process through Web UI
+-Easy to use API.
 
 
 Refer to example package on how to use the API.
