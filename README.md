@@ -4,6 +4,7 @@ Framework to create a Pool of processes in Java. Ideal for memory intensive oper
 The process pooler works by creating pool of processes and excutes each of the submitted task in a seperate JVM there by increasing the throughput of the application. The process pool also provides Web UI for monitoring the status of the process in the pool.
 
 Advantages:
+
 	No need to explicitaly check the status of the process.
 	Can be used to concurrently access pool from mutliple threads within a main process
 	Reuse the JVM to run different tasks there by increasing the the peformance
