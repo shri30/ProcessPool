@@ -1,5 +1,8 @@
 package org.sn.processpool;
 
+import javax.servlet.descriptor.JspPropertyGroupDescriptor;
+
+
 /*Copyright 2015 Shrinivas Nayak
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,10 +19,18 @@ limitations under the License.
 */
 
 /**
- * Status of the task that was submitted.
- *@see TaskStatus
+ * Creates Dummy Task to initialize the processes in the pool
+ * @see JProcess
  */
-public enum Status {
+public class DoNothingTask{
 
-	SUCESS,FAILURE;
+	/**
+	 * Executes nothing. Used to initialize the processes in the pool.
+	 * @param args
+	 * @throws Exception
+	 */
+	public static void main(String[] args) throws Exception {
+		//do nothing
+	}
+
 }

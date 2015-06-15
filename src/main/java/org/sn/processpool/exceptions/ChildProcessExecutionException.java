@@ -14,11 +14,21 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
+/**
+ * Exception to indicate the submitted task threw an exception
+ * @author nayaks4
+ *
+ */
 public class ChildProcessExecutionException extends RuntimeException{
 
 	private static final long serialVersionUID = 1L;
 
 	public ChildProcessExecutionException(String msg){
 		super(msg);
+	}
+	
+	public ChildProcessExecutionException(Throwable th){
+		super(th);
 	}
 }

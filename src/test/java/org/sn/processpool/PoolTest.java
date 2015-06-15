@@ -18,6 +18,7 @@ import java.util.Date;
 
 
 
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.sn.processpool.statistics.PoolWatcher;
@@ -93,19 +94,15 @@ public class PoolTest {
 		t1.start();t2.start();t3.start();t4.start();
 		t1.join();t2.join();t3.join();t4.join();
 		System.out.println(new Date().getTime() -starTime);
-		pp.terminate(false,4000);
+		pp.terminate(4000);
+		
 
+
+	}
 	
-/*	
-		Thread.sleep(3000);
-		for(ProcessHolder ph : pp.getPoolStatistics())
-		System.out.println(ph.toString());
-		Thread.sleep(3000);
-		t1.join();t2.join();t3.join();t4.join();
-		for(ProcessHolder ph : pp.getPoolStatistics())
-			System.out.println(ph.toString());
-		pp.terminate(true, 17000);*/
-
+	public static void main(String args[]) throws Exception{
+		PoolTest  pt = new PoolTest();
+		pt.testProcessPool();
 	}
 
 }

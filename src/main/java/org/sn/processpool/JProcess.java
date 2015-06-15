@@ -25,8 +25,26 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
+/**
+ * This class used by ProccessPool.class internally to create the JVM instance.
+ * This class takes the tasks submitted through ExecutorService.submit() and
+ * executes it within the JVM as separate process.
+ * 
+ * @author nayaks4
+ * @see ProcessPool
+ * @see ExecutorService
+ */
 final class JProcess {
 
+	private static final String JPROCESS_TERMINATED_FAILURE = "JPROCESS:TERMINATED:FAILURE";
+	
+	private static final String JPROCESS_TERMINATED_EXCEPTION = "JPROCESS:TERMINATED:EXCEPTION";
+	
+	private static final String JPROCESS_TERMINATED = "JPROCESS:TERMINATED";
+	
+	private static final String JPROCESS_TERMINATED_SUCCESS = "JPROCESS:TERMINATED:SUCCESS";
+	
 	private static Integer processId;
 	
 	public static void main(String args[]){
@@ -52,6 +70,7 @@ final class JProcess {
 			
 		final class TaskExecutor implements Callable<String>{
 
+
 			private byte[] _bytes;
 			
 			public TaskExecutor(byte[] bytes){
@@ -59,15 +78,22 @@ final class JProcess {
 			}
 			
 			@Override
-			public String call() throws Exception {
+			public String call() throws ChildProcessExecutionException {
 				//System.out.println(new String(bytes));
 				String command[] = new String(_bytes).split(" ");
 				String arguments[] = Arrays.copyOfRange(command, 1, command.length);
-				Class<?> clazz = Class.forName(command[0]);
-				JTask jtask = (JTask) clazz.newInstance();
-				Method m = clazz.getDeclaredMethod("main", String[].class);
-				m.invoke(null, new Object[] { arguments });
-				return "JPROCESS:TERMINATED:SUCCESS";
+				try{
+					Class<?> clazz = Class.forName(command[0]);
+					Method m = clazz.getDeclaredMethod("main", String[].class);
+					m.setAccessible(true);
+					m.invoke(null, new Object[] { arguments });
+				}catch(NoSuchMethodException nsm){
+					throw new ChildProcessExecutionException("Can not find the main method to execute");
+				}catch(Exception e){
+					throw new ChildProcessExecutionException(e);
+				}
+				
+				return JPROCESS_TERMINATED_SUCCESS;
 			}			
 		}
 		try{
@@ -93,12 +119,12 @@ final class JProcess {
 				String result =  null;
 				try{
 					result = future.get();
-					System.err.println("JPROCESS:TERMINATED");
-					System.out.println("JPROCESS:TERMINATED");
+					System.err.println(JPROCESS_TERMINATED);
+					System.out.println(JPROCESS_TERMINATED);
 					System.err.println(result);
 				}catch(Exception e){
-					System.err.println("JPROCESS:TERMINATED");
-					System.err.println("JPROCESS:TERMINATED:EXCEPTION");
+					System.err.println(JPROCESS_TERMINATED);
+					System.err.println(JPROCESS_TERMINATED_EXCEPTION);
 					//e.printStackTrace();
 					Throwable th =e;
 					while(th.getCause()!=null){
@@ -109,8 +135,8 @@ final class JProcess {
 					for(StackTraceElement st : th.getStackTrace())
 						System.err.println(st.toString());
 					//e.printStackTrace();
-					System.err.println("JPROCESS:TERMINATED:FAILURE");
-					System.out.println("JPROCESS:TERMINATED");
+					System.err.println(JPROCESS_TERMINATED_FAILURE);
+					System.out.println(JPROCESS_TERMINATED);
 				}
 			}
 		}catch(Exception e){

@@ -14,6 +14,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
+/**
+ * Indicates the exception within created a pool. This exception is specific to the creation of the pool
+ *
+ */
 public class ProcessPoolException extends RuntimeException{
 
 	private static final long serialVersionUID = 1L;

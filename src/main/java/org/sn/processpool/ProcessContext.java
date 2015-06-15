@@ -16,6 +16,23 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
+/**
+ * Holds the process Context. Use this class to get the processId of the process that will be executing the given task.
+ * This API is useful to know which Process is executing the submitted tasks.
+ * 
+ * Example Usage:
+ * 
+ * public static void main(String args[]){
+ * 
+ * 		String processId = ProcessContext.getProcessId();
+ * 
+ * 		System.out.println("The submitted task is running on the JVM with process ID: " + processId);
+ * 
+ * }
+ * 
+ *
+ */
 public class ProcessContext {
 
 	private static Integer processId;

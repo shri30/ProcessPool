@@ -14,6 +14,12 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
+/**
+ * Status of the task that was submitted. Holds the exception if the task threw Exception.
+ * @author nayaks4
+ *
+ */
 public class TaskStatus {
 
 	private Status status;
